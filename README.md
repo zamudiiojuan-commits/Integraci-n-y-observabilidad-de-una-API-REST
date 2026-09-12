@@ -3,9 +3,7 @@
 **Descripción breve:** 
 Esta API REST permite gestionar el inventario de libros de una biblioteca, implementando operaciones de creación, consulta, actualización y eliminación (CRUD) con persistencia de datos.
 
-**Contexto seleccionado:** Biblioteca.
-
-**Integrantes:** Laura (Desarrollo individual).
+**Contexto seleccionado:** Biblioteca.s
 
 **Tecnologías utilizadas:**
 * Java 17
