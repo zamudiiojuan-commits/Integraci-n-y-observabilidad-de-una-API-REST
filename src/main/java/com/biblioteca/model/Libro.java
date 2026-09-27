@@ -1,6 +1,7 @@
 package com.biblioteca.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "libros")
@@ -13,8 +14,10 @@ public class Libro {
     @Column(nullable = false)
     private String titulo;
     
-    @Column(nullable = false)
-    private String autor;
+    @ManyToOne
+    @JoinColumn(name = "autor_id", nullable = false)
+    @JsonIgnore // <-- Cambiamos a JsonIgnore para evitar el conflicto de serialización
+    private Autor autor;
     
     @Column(nullable = false)
     private String genero;
@@ -22,27 +25,24 @@ public class Libro {
     @Column(name = "anio_publicacion", nullable = false)
     private int anioPublicacion;
 
-    // Constructor vacío OBLIGATORIO para que la base de datos (JPA) funcione
-    public Libro() {
-    }
+    public Libro() {}
 
-    // Constructor sin el 'id' (porque la base de datos lo va a generar automáticamente)
-    public Libro(String titulo, String autor, String genero, int anioPublicacion) {
+    public Libro(String titulo, Autor autor, String genero, int anioPublicacion) {
         this.titulo = titulo;
         this.autor = autor;
         this.genero = genero;
         this.anioPublicacion = anioPublicacion;
     }
 
-    // Getters y Setters (igual a los que tenías)
+    // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     
     public String getTitulo() { return titulo; }
     public void setTitulo(String titulo) { this.titulo = titulo; }
     
-    public String getAutor() { return autor; }
-    public void setAutor(String autor) { this.autor = autor; }
+    public Autor getAutor() { return autor; }
+    public void setAutor(Autor autor) { this.autor = autor; }
     
     public String getGenero() { return genero; }
     public void setGenero(String genero) { this.genero = genero; }
